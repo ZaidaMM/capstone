@@ -1,0 +1,24 @@
+{
+  "name": "capstone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwindcss -i myexpensetracker/static/myexpensetracker/src.css -o myexpensetracker/static/myexpensetracker/styles.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZaidaMM/capstone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZaidaMM/capstone/issues"
+  },
+  "homepage": "https://github.com/ZaidaMM/capstone#readme",
+  "dependencies": {
+    "tailwindcss": "^2.2.16"
+  }
+}
