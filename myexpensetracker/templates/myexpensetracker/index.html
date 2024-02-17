@@ -5,7 +5,7 @@
   {% csrf_token %}
 
   <div
-    class="form-container py-5 px-10 flex flex-col lg:flex-row md:jflex grow md:justify-center items-center border border-sky-500"
+    class="form-container py-5 px-10 flex flex-col lg:flex-row md:flex grow md:justify-center items-center border border-sky-500 rtl:text-right text-right"
   >
     <div class="m-4 flex justify-center items-center rounded-lg">
       <div>
@@ -34,4 +34,48 @@
     </div>
   </div>
 </form>
+<div class="shadow-md sm:rounded-lg">
+  <table class="w-full text-sm text-gray-500 dark:text-gray-400 text-center">
+    <thead
+      class="text-xs text-gray-700 uppercase shadow-md dark:bg-gray-700 dark:text-gray-400"
+    >
+      <tr>
+        <th scope="col" class="px-6 py-3">Expense</th>
+        <th scope="col" class="px-6 py-3">Amount</th>
+        <th scope="col" class="px-6 py-3">Type</th>
+        <th scope="col" class="px-6 py-3">Date</th>
+      </tr>
+    </thead>
+    {% for item in items %}
+    <tbody>
+      <tr>
+        <td class="px-6 py-4">{{item.item}}</td>
+        <td class="px-6 py-4">{{item.amount}}</td>
+        <td class="px-6 py-4">{{item.type}}</td>
+        <td class="px-6 py-4">{{item.timestamp}}</td>
+        <td>
+          <a
+            href=""
+            class="rounded-lg cursor-pointer text-white bg-gray-800 hover:bg-gray-700 focus:outline-none text-xs px-3.5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700"
+            >Edit</a
+          >
+        </td>
+        <td>
+          <a
+            href=""
+            class="rounded-lg cursor-pointer text-white bg-red-800 hover:bg-red-700 focus:outline-none text-xs px-2.5 py-2.5 dark:bg-red-800 dark:hover:bg-gray-700"
+            >Delete</a
+          >
+        </td>
+      </tr>
+    </tbody>
+    {% endfor %}
+    <tfoot>
+      <tr class="font-semibold text-gray-900">
+        <th scope="row" class="px-6 py-3 text-base">Total</th>
+        <td class="px-6 py-3">{{items.amount}}XXX</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
 {% endblock %}
