@@ -1,13 +1,12 @@
 {% extends "myexpensetracker/layout.html" %} {% block body %}
-<h1>INDEX PAGE</h1>
 
 <form method="post">
   {% csrf_token %}
-
   <div
-    class="form-container py-5 px-10 flex flex-col lg:flex-row md:flex grow md:justify-center items-center border border-sky-500 rtl:text-right text-right"
+    class="form-container py-10 px-10 flex flex-col lg:flex-row md:flex grow md:justify-center items-center border border-sky-500 rtl:text-right text-right shadow-md"
   >
-    <div class="m-4 flex justify-center items-center rounded-lg">
+    <h1>Add a new item</h1>
+    <div class="m-4 flex justify-center items-center">
       <div>
         <label class="mr-3" for="item">Item </label>
       </div>
@@ -34,53 +33,56 @@
     </div>
   </div>
 </form>
-<div class="shadow-md sm:rounded-lg">
-  <table class="w-full text-sm text-gray-500 dark:text-gray-400 text-center">
-    <thead
-      class="text-xs text-gray-700 uppercase shadow-md dark:bg-gray-700 dark:text-gray-400"
+<div>
+  <div
+    class="table w-full text-sm text-gray-500 dark:text-gray-400 text-center shadow-md"
+  >
+    <div
+      class="table-header-group text-xs text-gray-700 uppercase shadow-sm dark:bg-gray-700 dark:text-gray-400"
     >
-      <tr>
-        <th scope="col" class="px-6 py-3">Expense</th>
-        <th scope="col" class="px-6 py-3">Amount</th>
-        <th scope="col" class="px-6 py-3">Type</th>
-        <th scope="col" class="px-6 py-3">Date</th>
-      </tr>
-    </thead>
+      <div class="table-row">
+        <div class="table-cell px-6 py-3" scope="col">Expense</div>
+        <div class="table-cell px-6 py-3" scope="col">Amount</div>
+        <div class="table-cell px-6 py-3" scope="col">Type</div>
+        <div class="table-cell px-6 py-3" scope="col">Date</div>
+      </div>
+    </div>
     {% for item in items %}
-    <tbody>
-      <tr>
-        <td class="px-6 py-4">{{item.item}}</td>
-        <td class="px-6 py-4">{{item.amount}}</td>
-        <td class="px-6 py-4">{{item.type}}</td>
-        <td class="px-6 py-4">{{item.timestamp}}</td>
-        <td>
-          <a
-            href="{% url 'edit' item.id %}"
-            class="rounded-lg cursor-pointer text-white bg-gray-800 hover:bg-gray-700 focus:outline-none text-xs px-3.5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700"
-            >Edit</a
-          >
-        </td>
-        <td>
-          <form method="post" action="{% url 'delete' item.id %}">
-            {% csrf_token %}
-            <button
-              name="delete-btn"
-              class="rounded-lg cursor-pointer text-white bg-red-800 hover:bg-red-700 focus:outline-none text-xs px-2.5 py-2.5 dark:bg-red-800 dark:hover:bg-gray-700"
+    <div class="table-row-group shadow-sm">
+      <div class="table-row shadow-sm">
+        <div class="table-cell px-6 py-4">{{item.item}}</div>
+        <div class="table-cell px-6 py-4">{{item.amount}}</div>
+        <div class="table-cell px-6 py-4">{{item.type}}</div>
+        <div class="table-cell px-6 py-4">{{item.timestamp}}</div>
+        <div class="table-cell px-6 py-4">
+          <div class="inline-flex sm:flex">
+            <a
+              href="{% url 'edit' item.id %}"
+              class="rounded-l cursor-pointer text-white bg-gray-800 hover:bg-gray-700 focus:outline-none text-xs px-2 py-2 dark:bg-gray-800 dark:hover:bg-gray-700"
+              >Edit</a
             >
-              Delete
-            </button>
-          </form>
-        </td>
-      </tr>
-    </tbody>
+
+            <form method="post" action="{% url 'delete' item.id %}">
+              {% csrf_token %}
+              <button
+                name="delete-btn"
+                class="rounded-r cursor-pointer text-white bg-red-800 hover:bg-red-700 focus:outline-none text-xs px-2 py-2 dark:bg-red-800 dark:hover:bg-gray-700"
+              >
+                Delete
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     {% endfor %}
-    <tfoot>
-      <tr class="font-semibold text-gray-900">
-        <th scope="row" class="px-6 py-3 text-base">Total</th>
-        <td class="px-6 py-3">XX</td>
-      </tr>
-    </tfoot>
-  </table>
+    <div class="table-row-group shadow-md">
+      <div class="table-row font-semibold text-gray-900">
+        <div class="table-cell px-6 py-3 text-base" scope="row">Total</div>
+        <div class="table-cell px-6 py-3" scope="row">XX</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock %}
