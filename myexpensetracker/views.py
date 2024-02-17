@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Expense
 from .forms import ExpenseForm
 
@@ -16,4 +16,12 @@ def index(request):
 def edit(request,id):
   item = Expense.objects.get(id=id)
   expense_form = ExpenseForm(instance=item)
+
+  if request.method == "POST":
+    item = Expense.objects.get(id=id)
+    form = ExpenseForm(request.POST, instance=item)
+    if form.is_valid():
+      form.save()
+      return redirect('index')
+
   return render(request,'myexpensetracker/edit.html', {'expense_form':expense_form})
