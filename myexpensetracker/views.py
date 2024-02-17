@@ -25,3 +25,11 @@ def edit(request,id):
       return redirect('index')
 
   return render(request,'myexpensetracker/edit.html', {'expense_form':expense_form})
+
+def delete(request, id):
+  if request.method == "POST" and 'delete-btn' in request.POST:
+    item = Expense.objects.get(id=id)
+    item.delete()
+  return redirect('index')
+
+
