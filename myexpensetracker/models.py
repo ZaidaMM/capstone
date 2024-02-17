@@ -9,4 +9,4 @@ class Expense(models.Model):
   timestamp = models.DateField(auto_now=True)
 
   def __str__(self):
-    return f"{self.item},  £{self.amount}, {self.type}, {self.timestamp}"
+    return f"{self.item},  £{self.amount}, {self.type}, {self.timestamp}, id:{self.id}"

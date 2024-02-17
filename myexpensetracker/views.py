@@ -9,7 +9,11 @@ def index(request):
     if item.is_valid():
       item.save()
 
-
   items = Expense.objects.all()
   expense_form = ExpenseForm()
   return render(request, 'myexpensetracker/index.html', {'expense_form':expense_form, 'items':items})
+
+def edit(request,id):
+  item = Expense.objects.get(id=id)
+  expense_form = ExpenseForm(instance=item)
+  return render(request,'myexpensetracker/edit.html', {'expense_form':expense_form})

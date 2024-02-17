@@ -9,7 +9,7 @@
   >
     <div class="m-4 flex justify-center items-center rounded-lg">
       <div>
-        <label class="mr-3" for="item">Item</label>
+        <label class="mr-3" for="item">Item </label>
       </div>
       <div class="border" id="item">{{ expense_form.item }}</div>
     </div>
@@ -55,7 +55,7 @@
         <td class="px-6 py-4">{{item.timestamp}}</td>
         <td>
           <a
-            href=""
+            href="{% url 'edit' item.id %}"
             class="rounded-lg cursor-pointer text-white bg-gray-800 hover:bg-gray-700 focus:outline-none text-xs px-3.5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700"
             >Edit</a
           >
@@ -78,4 +78,5 @@
     </tfoot>
   </table>
 </div>
+
 {% endblock %}
