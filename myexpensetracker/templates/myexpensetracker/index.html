@@ -51,7 +51,7 @@
     <div class="table-row-group shadow-sm">
       <div class="table-row shadow-sm">
         <div class="table-cell px-6 py-4">{{item.item}}</div>
-        <div class="table-cell px-6 py-4">{{item.amount}}</div>
+        <div class="table-cell px-6 py-4">£{{item.amount}}</div>
         <div class="table-cell px-6 py-4">{{item.type}}</div>
         <div class="table-cell px-6 py-4">{{item.timestamp}}</div>
         <div class="table-cell px-6 py-4">
@@ -79,7 +79,9 @@
     <div class="table-row-group shadow-md">
       <div class="table-row font-semibold text-gray-900">
         <div class="table-cell px-6 py-3 text-base" scope="row">Total</div>
-        <div class="table-cell px-6 py-3" scope="row">XX</div>
+        <div class="table-cell px-6 py-3" scope="row">
+          £{{ amount_total.amount__sum|floatformat:2 }}
+        </div>
       </div>
     </div>
   </div>
