@@ -5,7 +5,7 @@
   <div
     class="form-container py-10 px-10 flex flex-col lg:flex-row md:flex grow md:justify-center items-center border border-sky-500 rtl:text-right text-right shadow-md"
   >
-    <h1>Add a new item</h1>
+    <h1 class="font-semibold">Add a new item:</h1>
     <div class="m-4 flex justify-center items-center">
       <div>
         <label class="mr-3" for="item">Item </label>
@@ -40,7 +40,7 @@
     <div
       class="table-header-group text-xs text-gray-700 uppercase shadow-sm dark:bg-gray-700 dark:text-gray-400"
     >
-      <div class="table-row">
+      <div class="table-row font-semibold">
         <div class="table-cell px-6 py-3" scope="col">Expense</div>
         <div class="table-cell px-6 py-3" scope="col">Amount</div>
         <div class="table-cell px-6 py-3" scope="col">Type</div>
@@ -85,6 +85,40 @@
       </div>
     </div>
   </div>
+</div>
+<div class=" py-10 px-10 flex flex-col lg:flex-row md:flex grow md:justify-center items-center border border-sky-500 rtl:text-right text-right shadow-md">
+  <h1 class="font-semibold">Recent Expenses: </h1>
+  <div class="flex flex-row items-center border border-sky-500 rtl:text-right text-right px-3 m-3">
+    <p class="title pr-3">Today: </p>
+    <p >  £{{ today_total.amount__sum|floatformat:2}}</p>
+    
+  </div>
+  <div class="flex flex-row items-center border border-sky-500 rtl:text-right text-right px-3 m-3">
+    <p class="title pr-3">Last 7 days: </p>
+    <p > £{{ seven_day_total.amount__sum|floatformat:2  }}</p>
+    
+  </div>
+  <div class="flex flex-row items-center border border-sky-500 rtl:text-right text-right px-3 m-3" >
+    <p class="title pr-3">Last 3 months: </p>
+    <p > £{{ three_months_total.amount__sum|floatformat:2  }}</p>
+    
+  </div>
+  <div class="flex flex-row items-center border border-sky-500 rtl:text-right text-right px-3 m-3">
+    <p class="title pr-3">Last 365 days: </p>
+    <p > £{{ last_year_total.amount__sum |floatformat:2 }}</p>
+    
+  </div>
+</div>
+
+<div class=" py-10 px-10 flex flex-col lg:flex-row md:flex grow md:justify-center items-center border border-sky-500 rtl:text-right text-right shadow-md">
+  <h1 class="font-semibold">Expenses by Type: </h1>
+  {% for item in expenses_by_type %}
+  <div class="flex flex-row items-center border border-sky-500 rtl:text-right text-right px-3 m-3">
+    <p class="title pr-3"> {{ item.type }} </p>
+    <p > £{{ item.amount__sum |floatformat:2 }}</p>
+    
+  </div>
+  {% endfor %}
 </div>
 
 {% endblock %}
