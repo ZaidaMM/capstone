@@ -1,28 +1,33 @@
 {% extends "myexpensetracker/layout.html" %} {% block body %}
-
 <form method="post">
   {% csrf_token %}
   <div
-    class="form-container py-10 px-10 flex flex-col lg:flex-row md:flex grow md:justify-center items-center border border-sky-500 rtl:text-right text-right shadow-md"
+    class="form-container py-10 px-10 flex flex-col lg:flex-grow md:flex grow md:justify-center items-center border border-sky-500 rtl:text-right text-right shadow-md"
   >
     <h1 class="font-semibold">Add a new item:</h1>
     <div class="m-4 flex justify-center items-center">
       <div>
+        <label class="mr-3" for="category">Category </label>
+      </div>
+      <div class="border" id="category">{{ transaction_form.category }}</div>
+    </div>
+    <div class="m-4 flex justify-center items-center">
+      <div>
         <label class="mr-3" for="item">Item </label>
       </div>
-      <div class="border" id="item">{{ expense_form.item }}</div>
+      <div class="border" id="item">{{ transaction_form.item }}</div>
     </div>
     <div class="m-4 flex justify-center items-center">
       <div>
         <label class="mr-3" for="amount">Amount</label>
       </div>
-      <div class="border">{{ expense_form.amount }}</div>
+      <div class="border">{{ transaction_form.amount }}</div>
     </div>
     <div class="m-4 flex justify-center items-center">
       <div>
         <label class="mr-3" for="type">Type</label>
       </div>
-      <div class="border">{{ expense_form.type }}</div>
+      <div class="border">{{ transaction_form.type }}</div>
     </div>
     <div class="flex m-4 hover:scale-90">
       <input
@@ -41,7 +46,8 @@
       class="table-header-group text-xs text-gray-700 uppercase shadow-sm dark:bg-gray-700 dark:text-gray-400"
     >
       <div class="table-row font-semibold">
-        <div class="table-cell px-6 py-3" scope="col">Expense</div>
+        <div class="table-cell px-6 py-3" scope="col">Category</div>
+        <div class="table-cell px-6 py-3" scope="col">Transaction</div>
         <div class="table-cell px-6 py-3" scope="col">Amount</div>
         <div class="table-cell px-6 py-3" scope="col">Type</div>
         <div class="table-cell px-6 py-3" scope="col">Date</div>
@@ -50,6 +56,7 @@
     {% for item in items %}
     <div class="table-row-group shadow-sm">
       <div class="table-row shadow-sm">
+        <div class="table-cell px-6 py-4">{{item.category}}</div>
         <div class="table-cell px-6 py-4">{{item.item}}</div>
         <div class="table-cell px-6 py-4">£{{item.amount}}</div>
         <div class="table-cell px-6 py-4">{{item.type}}</div>
@@ -87,7 +94,7 @@
   </div>
 </div>
 <div class=" py-10 px-10 flex flex-col lg:flex-row md:flex grow md:justify-center items-center border border-sky-500 rtl:text-right text-right shadow-md">
-  <h1 class="font-semibold">Recent Expenses: </h1>
+  <h1 class="font-semibold">Recent transactions: </h1>
   <div class="flex flex-row items-center border border-sky-500 rtl:text-right text-right px-3 m-3">
     <p class="title pr-3">Today: </p>
     <p >  £{{ today_total.amount__sum|floatformat:2}}</p>
@@ -110,15 +117,30 @@
   </div>
 </div>
 
-<div class=" py-10 px-10 flex flex-col lg:flex-row md:flex grow md:justify-center items-center border border-sky-500 rtl:text-right text-right shadow-md">
-  <h1 class="font-semibold">Expenses by Type: </h1>
-  {% for item in expenses_by_type %}
-  <div class="flex flex-row items-center border border-sky-500 rtl:text-right text-right px-3 m-3">
-    <p class="title pr-3"> {{ item.type }} </p>
-    <p > £{{ item.amount__sum |floatformat:2 }}</p>
-    
+
+<div class="py-10 px-10 flex flex-col md:flex-grow md:justify-center items-center border border-sky-500 rtl:text-right text-right shadow-md">
+  <div class="flex flex-col items-center">
+    <h1 class="font-semibold">Transactions by Category: </h1>
+    <div class="flex flex-row items-center  rtl:text-right text-right px-3 m-3">
+    {% for item in transactions_by_category %}
+      <div class="flex flex-row items-center border border-sky-500 rtl:text-right text-right px-3 m-3">
+          <div class="flex flex-row">
+            <p class="title pr-3">Category: {{ item.category }}</p>
+            <p class="amount">£{{ item.amount__sum | floatformat:2 }}</p>
+           
+          </div>
+        </div>
+    {% endfor %}
+    </div>
   </div>
-  {% endfor %}
+  <div class="net_income flex items-center">
+    <h1 class="font-semibold">Net Income:</h1>
+    <div class="flex flex-row items-center border border-sky-500 rtl:text-right text-right px-3 m-3">
+      <p class="amount">£{{ net_income| floatformat:2 }}</p>
+    </div>
+  </div>
 </div>
+
+
 
 {% endblock %}

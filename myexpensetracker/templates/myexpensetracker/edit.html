@@ -1,7 +1,7 @@
 {% extends "myexpensetracker/layout.html" %} 
 {% block body %}
 
-<h1>EDIT PAGE</h1>
+
 
   <form method="post">
   {% csrf_token %} 
@@ -10,21 +10,27 @@
   >
     <div class="m-4 flex justify-center items-center rounded-lg">
       <div>
+        <label class="mr-3" for="category">Category </label>
+      </div>
+      <div class="border" id="category">{{ transaction_form.category }}</div>
+    </div>
+    <div class="m-4 flex justify-center items-center rounded-lg">
+      <div>
         <label class="mr-3" for="item">Item </label>
       </div>
-      <div class="border" id="item">{{ expense_form.item }}</div>
+      <div class="border" id="item">{{ transaction_form.item }}</div>
     </div>
     <div class="m-4 flex justify-center items-center">
       <div>
         <label class="mr-3" for="amount">Amount</label>
       </div>
-      <div class="border">{{ expense_form.amount }}</div>
+      <div class="border">{{ transaction_form.amount }}</div>
     </div>
     <div class="m-4 flex justify-center items-center">
       <div>
         <label class="mr-3" for="type">Type</label>
       </div>
-      <div class="border">{{ expense_form.type }}</div>
+      <div class="border">{{ transaction_form.type }}</div>
     </div>
     <div class="flex m-4 hover:scale-90">
       <input
