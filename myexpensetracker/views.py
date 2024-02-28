@@ -17,6 +17,9 @@ def index(request):
     item = TransactionForm(request.POST)
     if item.is_valid():
       item.save()
+       # Transactions by type
+  
+  select_item = Transaction.objects.values('type').distinct()
 
   items = Transaction.objects.all()
   transaction_form = TransactionForm()
@@ -47,6 +50,8 @@ def index(request):
   
   net_income = total_income['amount__sum'] - total_expenses['amount__sum']
 
+ 
+
   return render(
         request,
         'myexpensetracker/index.html',
@@ -59,7 +64,8 @@ def index(request):
             'three_months_total': three_months_total,
             'last_year_total': last_year_total,
             'transactions_by_category': transactions_by_category,
-            'net_income': net_income
+            'net_income': net_income,
+            'select_item':select_item
         
         }
     )
